@@ -10,10 +10,10 @@
 int main(int argc, string argv[]) {
 	string guess = malloc(5);
 
-	guess[0] = 'a';
+	guess[0] = 'b';
 
 	printf("%s\n", crypt(guess, "50"));
-	printf("%s\n", crypt("a", "50"));
+	printf("%s\n", crypt("b", "50"));
 
 	return 0;
 }
