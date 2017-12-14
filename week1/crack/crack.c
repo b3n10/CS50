@@ -5,18 +5,44 @@
 #define _GNU_SOURCE
 #include <crypt.h>
 
+#define _XOPEN_SOURCE       /* See feature_test_macros(7) */
+#include <unistd.h>
+
 #include <ctype.h>
+
+bool check_hash(string hash1, string hash2) {
+	int xhash = 0;
+	bool bhash = false;
+	while (xhash < strlen(hash1)) {
+		if (hash1[xhash] == hash2[xhash]) {
+			bhash = !true;
+		} else {
+			return true;
+		}
+		xhash++;
+	}
+	return bhash;
+}
 
 int main(int argc, string argv[]) {
 	string guess = malloc(5);
+	string hashpword = "50s7QGTz4Jjzc";
+	string hashguess = "";
 
-	guess[0] = 'b';
+	//starts from A which is 65
+	int count = 65;
+	while (check_hash(hashpword, hashguess)) {
+		if (isalpha((char) count)) {
+			guess[0] = (char) count; 
+			hashguess = crypt(guess, "50");
+		}
+		count++;
+	}
 
-	printf("%s\n", crypt(guess, "50"));
-	printf("%s\n", crypt("b", "50"));
-
+	printf("Guess: %s\n", guess);
 	return 0;
 }
+
 //	if (argc < 2) {
 //		printf("Error: Need at least 1 argument.\n");
 //	} else if (argc > 2) {
