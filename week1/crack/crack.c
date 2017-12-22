@@ -26,20 +26,24 @@ bool check_hash(string hash1, string hash2) {
 
 int main(int argc, string argv[]) {
 	string guess = malloc(5);
-	string hashpword = "50s7QGTz4Jjzc";
+	string hashpword = "50LvszlBYAscE";//old 50FMwyUJKQbNg
 	string hashguess = "";
 
-	//starts from A which is 65
-	int count = 65;
-	while (check_hash(hashpword, hashguess)) {
-		if (isalpha((char) count)) {
-			guess[0] = (char) count; 
+	for (int i = 0; i < 5; i++) {
+		//starts from A which is 65, ends in 122
+		int count = 65;
+		while (check_hash(hashpword, hashguess) && count < 123) {
+			if (isalpha((char) count)) {
+				guess[i] = (char) count; 
+			}
 			hashguess = crypt(guess, "50");
+			count++;
 		}
-		count++;
 	}
 
 	printf("Guess: %s\n", guess);
+	string new_crypt = "zAzzA";
+	printf("%s %s\n", new_crypt, crypt("zAzzA", "50"));
 	return 0;
 }
 
