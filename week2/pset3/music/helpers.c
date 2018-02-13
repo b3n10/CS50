@@ -67,9 +67,5 @@ int frequency(string note)
 bool is_rest(string s)
 {
     //https://stackoverflow.com/a/26609721/6353682
-    if (s[0] == '\0')
-    {
-        return true;
-    }
-    return false;
+    return s[0] == '\0';
 }
